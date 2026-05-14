@@ -7,10 +7,11 @@
     <style>
         :root {
             --primary-color: #2c3e50;
-            --accent-color: #e67e22; /* لون برتقالي هادئ يتناسب مع البنكرياس */
+            --accent-color: #e67e22; 
             --bg-color: #fdfefe;
             --pearl-color: #16a085;
             --success-color: #27ae60;
+            --info-color: #2980b9; /* لون قسم الوقاية */
         }
 
         body, html {
@@ -143,8 +144,6 @@
         <div id="pictures-card" class="interactive-card" style="display:none;" onclick="toggleSection('pictures-container')">
             <h2 style="margin:0; color: var(--success-color);">Pathology Pictures</h2>
             <div id="pictures-container" class="detail-text" style="border-left-color: var(--success-color);">
-                
-                <!-- Gross -->
                 <div class="sub-clickable-item" onclick="toggleSubSection(event, 'gross-sub')">
                     <h3 style="margin:0; color: var(--primary-color);">+ Gross Appearance</h3>
                     <div id="gross-sub" class="sub-content">
@@ -152,20 +151,29 @@
                         <p>Well-circumscribed, solid, yellow-to-tan mass. Often shows areas of hemorrhage or cystic changes in larger tumors.</p>
                     </div>
                 </div>
-
-                <!-- Microscopic -->
                 <div class="sub-clickable-item" onclick="toggleSubSection(event, 'micro-sub')">
                     <h3 style="margin:0; color: var(--primary-color);">+ Microscopic</h3>
                     <div id="micro-sub" class="sub-content">
                         <img src="m1.jpg" alt="Microscopic" class="gallery-img" onerror="this.alt='[Microscopic Image: p_micro.jpg]'">
-                        <p>Cells show a <strong>"Salt and Pepper"</strong> chromatin pattern. Arranged in nests, trabeculae, or glandular patterns with abundant granular cytoplasm.</p>
+                        <p>Cells show a <strong>"Salt and Pepper"</strong> chromatin pattern. Arranged in nests, trabeculae, or glandular patterns.</p>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- 4. Famous Case -->
+        <!-- 4. Prevention & Monitoring (القسم الجديد) -->
+        <div id="prevention-card" class="interactive-card" style="display:none;" onclick="toggleSection('prevention-content')">
+            <h2 style="margin:0; color: var(--info-color);">Prevention & Monitoring</h2>
+            <div id="prevention-content" class="detail-text" style="border-left-color: var(--info-color);">
+                <ul>
+                    <li><strong>Genetic Screening:</strong> Routine checks for those with a family history of MEN1.</li>
+                    <li><strong>Surveillance:</strong> Regular MRI/CT scans for high-risk patients to detect small, asymptomatic lesions.</li>
+                    <li><strong>Biomarkers:</strong> Monitoring <strong>Chromogranin A</strong> levels as a sensitive indicator for tumor activity or recurrence.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Famous Case -->
         <div id="famous-case-btn" class="interactive-card" style="display:none;" onclick="toggleSection('celeb-identity')">
             <h2 style="margin:0; color: var(--accent-color);">Famous Case</h2>
             <div id="celeb-identity" class="detail-text" style="text-align:center; font-size:1.6rem; font-weight:bold;">
@@ -175,7 +183,7 @@
             </div>
         </div>
 
-        <!-- 5. Case Details -->
+        <!-- 6. Case Details -->
         <div id="celeb-full-details" style="display:none;">
             <img id="celeb-img" src="11.jpg" alt="Steve Jobs">
             <div class="interactive-card" style="text-align:left; cursor:default;">
@@ -205,9 +213,11 @@
             const isVisible = (el.style.display === 'block');
             el.style.display = isVisible ? 'none' : 'block';
             
+            // تسلسل الظهور المنطقي للأقسام
             if(id === 'definition-content') document.getElementById('causes-card').style.display = 'block';
             else if(id === 'causes-content') document.getElementById('pictures-card').style.display = 'block';
-            else if(id === 'pictures-container') document.getElementById('famous-case-btn').style.display = 'block';
+            else if(id === 'pictures-container') document.getElementById('prevention-card').style.display = 'block';
+            else if(id === 'prevention-content') document.getElementById('famous-case-btn').style.display = 'block';
         }
 
         function toggleSubSection(event, id) {
